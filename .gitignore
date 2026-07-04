@@ -1,0 +1,78 @@
+# ==========================
+# Python
+# ==========================
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environnement virtuel
+.venv/
+venv/
+env/
+
+# Variables d'environnement
+.env
+.env.*
+
+# Base de données SQLite
+db.sqlite3
+db.sqlite3-journal
+
+# Logs
+*.log
+
+# Fichiers Python
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Cache
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# VS Code
+.vscode/
+
+# JetBrains (PyCharm)
+.idea/
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# ==========================
+# Node.js / Vue
+# ==========================
+
+frontend/node_modules/
+frontend/dist/
+
+# npm
+npm-debug.log*
+
+# yarn
+yarn-debug.log*
+yarn-error.log*
+
+# pnpm
+pnpm-debug.log*
+
+# ==========================
+# Django
+# ==========================
+
+staticfiles/
+media/
+
+# ==========================
+# Misc
+# ==========================
+
+*.swp
+*.swo
