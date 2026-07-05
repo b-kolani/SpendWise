@@ -12,6 +12,16 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 
+from datetime import timedelta 
+
+# SETUP JWT
+# Token expires in 30 minutes; this token is used to access to the API
+# Refresh Token expires in 7 days; this one is used to to get a new JWT
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30), 
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7), 
+}
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -49,6 +59,16 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'users.User'
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+
+    "DEFAULT_PERMISSION_CLASSES": (
+        "rest_framework.permissions.IsAuthenticated",
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,0 +1,14 @@
+name: SpendWise Dev
+values:
+  - key: baseUrl
+    value: 'http://localhost:8000'
+  - key: username
+    value: admin
+  - key: password
+    secret: true
+  - key: refreshToken
+    secret: true
+  - key: categoryId
+    value: ''
+  - key: accessToken
+    secret: true

@@ -1,0 +1,32 @@
+$kind: http-request
+name: Update Transaction
+method: PUT
+url: '{{baseUrl}}/api/transactions/{{transactionId}}/'
+headers:
+  - key: Authorization
+    value: 'Bearer {{accessToken}}'
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "title": "Grocery Shopping - Updated",
+      "amount": "52.00",
+      "date": "2026-07-05",
+      "description": "Weekly groceries with extras",
+      "type": "EXPENSE",
+      "category": {{categoryId}}
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status is 200", function () {
+        pm.response.to.have.status(200);
+      });
+      pm.test("Transaction was updated correctly", function () {
+        const json = pm.response.json();
+        pm.expect(json.title).to.eql("Grocery Shopping - Updated");
+        pm.expect(parseFloat(json.amount)).to.eql(52.00);
+      });

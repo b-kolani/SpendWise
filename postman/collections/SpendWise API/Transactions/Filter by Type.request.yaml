@@ -1,0 +1,21 @@
+$kind: http-request
+name: Filter by Type
+method: GET
+url: "{{baseUrl}}/api/transactions/?type=EXPENSE"
+headers:
+  Authorization: Bearer {{accessToken}}
+queryParams:
+  type: EXPENSE
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status is 200", function () {
+        pm.response.to.have.status(200);
+      });
+      pm.test("All returned transactions are EXPENSE type", function () {
+        const json = pm.response.json();
+        json.forEach(function(tx) {
+          pm.expect(tx.type).to.eql("EXPENSE");
+        });
+      });
+    language: text/javascript

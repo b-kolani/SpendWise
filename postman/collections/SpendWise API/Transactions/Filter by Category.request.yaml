@@ -1,0 +1,22 @@
+$kind: http-request
+name: Filter by Category
+method: GET
+url: "{{baseUrl}}/api/transactions/?category={{categoryId}}"
+headers:
+  Authorization: Bearer {{accessToken}}
+queryParams:
+  category: "{{categoryId}}"
+scripts:
+  - type: afterResponse
+    code: |-
+      pm.test("Status is 200", function () {
+        pm.response.to.have.status(200);
+      });
+      pm.test("All returned transactions belong to the category", function () {
+        const json = pm.response.json();
+        const catId = parseInt(pm.collectionVariables.get("categoryId"));
+        json.forEach(function(tx) {
+          pm.expect(tx.category).to.eql(catId);
+        });
+      });
+    language: text/javascript

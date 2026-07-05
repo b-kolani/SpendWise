@@ -1,0 +1,31 @@
+$kind: collection
+name: SpendWise API
+variables:
+  - key: baseUrl
+    value: http://localhost:8000
+    secret: false
+  - key: username
+    value: ""
+    secret: false
+  - key: password
+    value: ""
+    secret: false
+  - key: accessToken
+    value: ""
+    secret: false
+  - key: refreshToken
+    value: ""
+    secret: false
+  - key: categoryId
+    value: ""
+    secret: false
+  - key: transactionId
+    value: ""
+    secret: false
+  - key: json_web_token_05ie
+    secret: true
+  - key: transactionId
+    value: ""
+    secret: false
+  - key: auth_secret_0oiv
+    secret: true

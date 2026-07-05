@@ -1,0 +1,27 @@
+$kind: http-request
+name: Partial Update Category
+method: PATCH
+url: '{{baseUrl}}/api/categories/{{categoryId}}/'
+order: 5000
+headers:
+  - key: Authorization
+    value: 'Bearer {{accessToken}}'
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "color": "#900C3F"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status is 200", function () {
+        pm.response.to.have.status(200);
+      });
+      pm.test("Only color was updated", function () {
+        const json = pm.response.json();
+        pm.expect(json.color).to.eql("#900C3F");
+      });

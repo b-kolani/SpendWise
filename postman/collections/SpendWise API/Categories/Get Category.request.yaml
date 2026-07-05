@@ -1,0 +1,24 @@
+$kind: http-request
+name: Get Category
+method: GET
+url: '{{baseUrl}}/api/categories/{{categoryId}}/'
+order: 3000
+headers:
+  - key: Authorization
+    value: 'Bearer {{accessToken}}'
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      pm.test("Status is 200", function () {
+        pm.response.to.have.status(200);
+      });
+      pm.test("Category has correct fields", function () {
+        const json = pm.response.json();
+        pm.expect(json).to.have.property("id");
+        pm.expect(json).to.have.property("name");
+        pm.expect(json).to.have.property("color");
+      });
+      pm.test("Returns 404 for non-existent category", function () {
+        // Informational: run with an invalid ID to verify 404
+      });

@@ -1,0 +1,8 @@
+$kind: collection
+name: Categories
+auth:
+  - id: 4ca47327-d798-49b2-b729-421aa48991d4
+    type: bearer
+    name: Bearer Token
+    credentials:
+      token: "{{auth_secret_0oiv}}"
