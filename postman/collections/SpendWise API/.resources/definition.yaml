@@ -5,17 +5,13 @@ variables:
     value: http://localhost:8000
     secret: false
   - key: username
-    value: ""
-    secret: false
+    secret: true
   - key: password
-    value: ""
-    secret: false
+    secret: true
   - key: accessToken
-    value: ""
-    secret: false
+    secret: true
   - key: refreshToken
-    value: ""
-    secret: false
+    secret: true
   - key: categoryId
     value: ""
     secret: false
@@ -24,8 +20,5 @@ variables:
     secret: false
   - key: json_web_token_05ie
     secret: true
-  - key: transactionId
-    value: ""
-    secret: false
   - key: auth_secret_0oiv
     secret: true

@@ -2,13 +2,25 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
 from .models import Transaction
-from .serializers import TransactionSerializer
+from .serializers import (
+    TransactionReadSerializer,
+    TransactionWriteSerializer
+)
 
 
 class TransactionViewSet(ModelViewSet):
-    serializer_class = TransactionSerializer
+    # serializer_class = TransactionSerializer
     permission_classes = [IsAuthenticated]
 
+    # Return the class to use for the serializer.
+    # Thsi function will inference the serializer to use
+    # base on the action
+    def get_serializer_class(self):
+        if self.action in ["list", "retrieve"]:
+            return TransactionReadSerializer
+        
+        return TransactionWriteSerializer
+    
     def get_queryset(self):
         queryset = Transaction.objects.filter(user=self.request.user)
 

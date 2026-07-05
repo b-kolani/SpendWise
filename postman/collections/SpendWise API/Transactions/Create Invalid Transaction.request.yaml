@@ -1,12 +1,10 @@
 $kind: http-request
 name: Create Invalid Transaction
 method: POST
-url: '{{baseUrl}}/api/transactions/'
+url: "{{baseUrl}}/api/transactions/"
 headers:
-  - key: Authorization
-    value: 'Bearer {{accessToken}}'
-  - key: Content-Type
-    value: application/json
+  Authorization: Bearer {{accessToken}}
+  Content-Type: application/json
 body:
   type: json
   content: |-
@@ -15,11 +13,10 @@ body:
       "amount": "-10.00",
       "date": "2026-07-05",
       "type": "EXPENSE",
-      "category": {{categoryId}}
+      "category": {{invalidCategoryId}}
     }
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       pm.test("Status is 400 for negative amount", function () {
         pm.response.to.have.status(400);
@@ -28,3 +25,4 @@ scripts:
         const json = pm.response.json();
         pm.expect(JSON.stringify(json)).to.include("amount");
       });
+    language: text/javascript
