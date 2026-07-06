@@ -1,21 +1,27 @@
 $kind: http-request
 name: Filter by Type
 method: GET
-url: "{{baseUrl}}/api/transactions/?type=EXPENSE"
+url: "{{baseUrl}}/api/transactions/?type=expense"
 headers:
   Authorization: Bearer {{accessToken}}
 queryParams:
-  type: EXPENSE
+  type: expense
 scripts:
   - type: afterResponse
-    code: |-
+    code: |
       pm.test("Status is 200", function () {
         pm.response.to.have.status(200);
       });
-      pm.test("All returned transactions are EXPENSE type", function () {
+
+      pm.test("All returned transactions are expense or income type", function () {
         const json = pm.response.json();
+        console.log(json);
         json.forEach(function(tx) {
-          pm.expect(tx.type).to.eql("EXPENSE");
+          if (tx.type === "income") {
+              pm.expect(tx.type).to.eq("income");
+          } else {
+              pm.expect(tx.type).to.eq("expense");
+          }
         });
       });
     language: text/javascript

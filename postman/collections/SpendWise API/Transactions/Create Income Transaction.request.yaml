@@ -9,11 +9,11 @@ body:
   type: json
   content: |-
     {
-      "title": "Monthly Salary",
-      "amount": "3000.00",
+      "title": "Monthly Expense 5",
+      "amount": "500.00",
       "date": "2026-07-01",
       "description": "July salary",
-      "type": "INCOME",
+      "type": "expense",
       "category": {{categoryId}}
     }
 scripts:

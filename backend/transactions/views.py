@@ -1,11 +1,14 @@
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Transaction
 from .serializers import (
     TransactionReadSerializer,
     TransactionWriteSerializer
 )
+
+from .filters import TransactionFilter
 
 
 class TransactionViewSet(ModelViewSet):
@@ -25,15 +28,19 @@ class TransactionViewSet(ModelViewSet):
         queryset = Transaction.objects.filter(user=self.request.user)
 
         # Optional filters via query params
-        transaction_type = self.request.query_params.get('type')
-        category_id = self.request.query_params.get('category')
+        # transaction_type = self.request.query_params.get('type')
+        # category_id = self.request.query_params.get('category')
 
-        if transaction_type:
-            queryset = queryset.filter(type=transaction_type)
-        if category_id:
-            queryset = queryset.filter(category_id=category_id)
+        # if transaction_type:
+        #     queryset = queryset.filter(type=transaction_type)
+        # if category_id:
+        #     queryset = queryset.filter(category_id=category_id)
 
         return queryset
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+    
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = TransactionFilter
+

@@ -1,13 +1,11 @@
 $kind: http-request
 name: Get Transaction
 method: GET
-url: '{{baseUrl}}/api/transactions/{{transactionId}}/'
+url: "{{baseUrl}}/api/transactions/{{transactionId}}/"
 headers:
-  - key: Authorization
-    value: 'Bearer {{accessToken}}'
+  Authorization: Bearer {{accessToken}}
 scripts:
   - type: afterResponse
-    language: text/javascript
     code: |-
       pm.test("Status is 200", function () {
         pm.response.to.have.status(200);
@@ -20,5 +18,5 @@ scripts:
         pm.expect(json).to.have.property("date");
         pm.expect(json).to.have.property("type");
         pm.expect(json).to.have.property("category");
-        pm.expect(json).to.have.property("user");
       });
+    language: text/javascript

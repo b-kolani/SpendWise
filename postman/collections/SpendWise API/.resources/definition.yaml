@@ -18,7 +18,3 @@ variables:
   - key: transactionId
     value: ""
     secret: false
-  - key: json_web_token_05ie
-    secret: true
-  - key: auth_secret_0oiv
-    secret: true

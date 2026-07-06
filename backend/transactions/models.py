@@ -5,8 +5,8 @@ from django.db import models
 class   Transaction(models.Model):
     
     class   TransactionType(models.TextChoices):
-        INCOME = 'INCOME', 'Income'
-        EXPENSE = 'EXPENSE', 'Expense'
+        INCOME = "income", "Income"
+        EXPENSE = "expense", "Expense"
     
     title = models.CharField(max_length=100)
     amount = models.DecimalField(max_digits=10, decimal_places=2)

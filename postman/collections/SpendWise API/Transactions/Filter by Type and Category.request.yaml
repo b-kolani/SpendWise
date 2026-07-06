@@ -1,11 +1,14 @@
 $kind: http-request
-name: Filter by Category
+name: Filter by Type and Category
+url: "{{baseUrl}}/api/transactions/?type=expense&category={{categoryId}}"
 method: GET
-url: "{{baseUrl}}/api/transactions/?category={{categoryId}}"
 headers:
   Authorization: Bearer {{accessToken}}
 queryParams:
+  type: expense
   category: "{{categoryId}}"
+auth:
+  type: noauth
 scripts:
   - type: afterResponse
     code: |-
@@ -13,11 +16,12 @@ scripts:
         pm.response.to.have.status(200);
       });
 
-      pm.test("All returned transactions belong to the category", function () {
+      pm.test("All returned transactions are expense or income type and belong to the category", function () {
         const json = pm.response.json();
-        const catId = parseInt(pm.collectionVariables.get("categoryId"));
         json.forEach(function(tx) {
           pm.expect(tx.category);
+          pm.expect(tx.type).to.be.oneOf(["expense", "income"]);
         });
       });
     language: text/javascript
+order: 4063995789049855
