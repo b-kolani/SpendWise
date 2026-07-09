@@ -1,0 +1,10 @@
+$kind: http-request
+name: Filter Transaction by  Date
+url: "{{baseUrl}}/api/transactions/?date_after=2026-07-01&date_before=2026-07-31"
+method: GET
+headers:
+  Authorization: Bearer {{accessToken}}
+queryParams:
+  date_after: 2026-07-01
+  date_before: 2026-07-31
+order: 1696921686114303

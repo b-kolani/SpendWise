@@ -2,10 +2,15 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import (
+    OrderingFilter,
+    SearchFilter,
+)
+
 from .models import Transaction
 from .serializers import (
     TransactionReadSerializer,
-    TransactionWriteSerializer
+    TransactionWriteSerializer,
 )
 
 from .filters import TransactionFilter
@@ -14,6 +19,27 @@ from .filters import TransactionFilter
 class TransactionViewSet(ModelViewSet):
     # serializer_class = TransactionSerializer
     permission_classes = [IsAuthenticated]
+
+    filter_backends = [
+        DjangoFilterBackend,
+        OrderingFilter,
+        SearchFilter,
+    ]
+
+    filterset_class = TransactionFilter
+
+    ordering_fields = [
+        "date",
+        "amount",
+        "title"
+    ]
+
+    ordering = ["-date"]
+
+    search_fields = [
+        "title",
+        "description",
+    ]
 
     # Return the class to use for the serializer.
     # Thsi function will inference the serializer to use
@@ -35,12 +61,10 @@ class TransactionViewSet(ModelViewSet):
         #     queryset = queryset.filter(type=transaction_type)
         # if category_id:
         #     queryset = queryset.filter(category_id=category_id)
-
+    
         return queryset
+    
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
     
-    filter_backends = [DjangoFilterBackend]
-    filterset_class = TransactionFilter
-

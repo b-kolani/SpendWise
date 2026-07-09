@@ -1,0 +1,10 @@
+$kind: http-request
+name: List Transaction Order By
+url: "{{baseUrl}}/api/transactions/?ordering=date&category=1"
+method: GET
+headers:
+  Authorization: Bearer {{accessToken}}
+queryParams:
+  ordering: date
+  category: "1"
+order: 164466587074559

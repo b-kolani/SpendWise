@@ -1,0 +1,9 @@
+$kind: http-request
+name: Search Transactions by
+url: "{{baseUrl}}/api/transactions/?search=monthly"
+method: GET
+headers:
+  Authorization: Bearer {{accessToken}}
+queryParams:
+  search: monthly
+order: 3501201147559935

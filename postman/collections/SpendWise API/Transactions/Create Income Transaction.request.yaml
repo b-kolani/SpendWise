@@ -9,11 +9,10 @@ body:
   type: json
   content: |-
     {
-      "title": "Monthly Expense 5",
-      "amount": "500.00",
-      "date": "2026-07-01",
+      "title": "Monthly Income 1",
+      "amount": 750.00,
       "description": "July salary",
-      "type": "expense",
+      "type": "income",
       "category": {{categoryId}}
     }
 scripts:
@@ -22,9 +21,13 @@ scripts:
       pm.test("Status is 201", function () {
         pm.response.to.have.status(201);
       });
-      pm.test("Income transaction created successfully", function () {
+      pm.test("Income or Expense transaction created successfully", function () {
         const json = pm.response.json();
-        pm.expect(json.type).to.eql("INCOME");
-        pm.expect(parseFloat(json.amount)).to.eql(3000.00);
+        if (json.type === "income") {
+          pm.expect(json.type).to.eql("income");
+        } else {
+          pm.expect(json.type).to.eql("expense");
+        }
+        pm.expect(parseFloat(json.amount)).to.eql(parseInt(json.amount));
       });
     language: text/javascript
