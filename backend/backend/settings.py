@@ -37,7 +37,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -56,7 +55,8 @@ INSTALLED_APPS = [
     # PROJECTS APPS
     'users',
     'categories',
-    'transactions'
+    'transactions',
+    'dashboard'
 ]
 
 AUTH_USER_MODEL = 'users.User'

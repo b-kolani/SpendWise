@@ -1,4 +1,9 @@
 $kind: http-request
-url: ""
+name: Transactions List per Page
+url: "{{baseUrl}}/api/transactions/?page=2"
 method: GET
+headers:
+  Authorization: Bearer {{accessToken}}
+queryParams:
+  page: "2"
 order: 289290066067455

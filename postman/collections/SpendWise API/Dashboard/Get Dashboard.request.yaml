@@ -1,0 +1,7 @@
+$kind: http-request
+name: Get Dashboard
+url: "{{baseUrl}}/api/dashboard"
+method: GET
+headers:
+  Authorization: Bearer {{accessToken}}
+order: 1783938457478

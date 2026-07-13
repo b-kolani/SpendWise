@@ -6,9 +6,9 @@ values:
     value: admin
   - key: password
     secret: true
-  - key: accessToken
-    secret: true
   - key: refreshToken
+    secret: true
+  - key: accessToken
     secret: true
   - key: categoryId
     value: ''

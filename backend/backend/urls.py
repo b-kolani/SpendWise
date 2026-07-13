@@ -39,5 +39,9 @@ urlpatterns = [
     path(
         "api/transactions/",
         include("transactions.urls")
+    ),
+    path(
+        "api/dashboard/",
+        include("dashboard.urls")
     )
 ]
