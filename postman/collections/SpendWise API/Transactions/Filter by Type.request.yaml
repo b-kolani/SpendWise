@@ -1,11 +1,11 @@
 $kind: http-request
 name: Filter by Type
 method: GET
-url: "{{baseUrl}}/api/transactions/?type=expense"
+url: "{{baseUrl}}/api/transactions/?type=income"
 headers:
   Authorization: Bearer {{accessToken}}
 queryParams:
-  type: expense
+  type: income
 scripts:
   - type: afterResponse
     code: |

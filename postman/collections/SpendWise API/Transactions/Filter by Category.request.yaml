@@ -16,7 +16,7 @@ scripts:
       pm.test("All returned transactions belong to the category", function () {
         const json = pm.response.json();
         const catId = parseInt(pm.collectionVariables.get("categoryId"));
-        json.forEach(function(tx) {
+        json.results.forEach(function(tx) {
           pm.expect(tx.category);
         });
       });

@@ -1,11 +1,11 @@
 $kind: http-request
 name: Filter by Type and Category
-url: "{{baseUrl}}/api/transactions/?type=expense&category={{categoryId}}"
+url: "{{baseUrl}}/api/transactions/?type=income&category={{categoryId}}"
 method: GET
 headers:
   Authorization: Bearer {{accessToken}}
 queryParams:
-  type: expense
+  type: income
   category: "{{categoryId}}"
 auth:
   type: noauth
@@ -18,7 +18,7 @@ scripts:
 
       pm.test("All returned transactions are expense or income type and belong to the category", function () {
         const json = pm.response.json();
-        json.forEach(function(tx) {
+        json.results.forEach(function(tx) {
           pm.expect(tx.category);
           pm.expect(tx.type).to.be.oneOf(["expense", "income"]);
         });

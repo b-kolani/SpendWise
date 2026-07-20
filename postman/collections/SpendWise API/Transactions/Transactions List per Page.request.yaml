@@ -1,9 +1,9 @@
 $kind: http-request
 name: Transactions List per Page
-url: "{{baseUrl}}/api/transactions/?page=2"
+url: "{{baseUrl}}/api/transactions/?page=1"
 method: GET
 headers:
   Authorization: Bearer {{accessToken}}
 queryParams:
-  page: "2"
+  page: "1"
 order: 289290066067455

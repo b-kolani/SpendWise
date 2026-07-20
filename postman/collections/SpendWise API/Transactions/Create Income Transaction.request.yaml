@@ -13,7 +13,8 @@ body:
       "amount": 750.00,
       "description": "July salary",
       "type": "income",
-      "category": {{categoryId}}
+      "category": {{categoryId}},
+      "date": "2026-07-20"
     }
 scripts:
   - type: afterResponse

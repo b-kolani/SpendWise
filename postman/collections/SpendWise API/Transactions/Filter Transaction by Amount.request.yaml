@@ -1,10 +1,16 @@
 $kind: http-request
 name: Filter Transaction by Amount
-url: "{{baseUrl}}/api/transactions/?amount_min=300&amount_max=500"
+url: "{{baseUrl}}/api/transactions/?amount_min=1&amount_max=500"
 method: GET
 headers:
   Authorization: Bearer {{accessToken}}
 queryParams:
-  amount_min: "300"
-  amount_max: "500"
+  - key: amount_min
+    value: "1"
+    disabled: false
+    description: ""
+  - key: amount_max
+    value: "500"
+    disabled: false
+    description: ""
 order: 716390769098751
