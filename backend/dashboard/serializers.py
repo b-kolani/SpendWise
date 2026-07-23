@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 class CategoryExpenseSerializer(serializers.Serializer):
-    category_name = serializers.CharField()
+    category_ = serializers.CharField()
     total = serializers.DecimalField(
         max_digits=12,
         decimal_places=2
@@ -15,7 +15,7 @@ class   MonthlyExpenseSerializer(serializers.Serializer):
     )
 
 class   CategoryIncomeSerializer(serializers.Serializer):
-    category_name = serializers.CharField()
+    category_ = serializers.CharField()
     total = serializers.DecimalField(
         max_digits=12,
         decimal_places=2

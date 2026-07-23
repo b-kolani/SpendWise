@@ -7,49 +7,76 @@ from transactions.models import Transaction
 
 class   DashboardService:
 
-    def __init__(self, user):
+    def __init__(
+        self,
+        user,
+        date_after,
+        date_before
+    ):
         self.user = user
+        self.date_after = date_after
+        self.date_before = date_before
     
+    def _get_transactions(self):
+        queryset = Transaction.objects.filter(
+            user=self.user
+        )
+
+        if self.date_after:
+            queryset = queryset.filter(
+                date__gte = self.date_after
+            )
+        
+        if self.date_before:
+            queryset = queryset.filter(
+                date__lte = self.date_before
+            )
+
+        return queryset
+
     def get_total_income(self):
         return (
-            Transaction.objects.filter(
-                user = self.user,
-                type = Transaction.TransactionType.INCOME
+            self._get_transactions()
+            .filter(
+                type=Transaction.TransactionType.INCOME
             )
-            .aggregate(total=Sum("amount"))["total"]
-            or Decimal("0")
+            .aggregate(
+                total=Sum("amount")
+            )["total"] or Decimal("0")
         )
 
     def get_total_expense(self):
         return (
-            Transaction.objects.filter(
-                user = self.user,
-                type = Transaction.TransactionType.EXPENSE
+            self._get_transactions()
+            .filter(
+                type=Transaction.TransactionType.EXPENSE
             )
-            .aggregate(total=Sum("amount"))["total"]
-            or Decimal("0")
+            .aggregate(
+                total=Sum("amount")
+            )["total"] or Decimal("0")
         )
 
     def get_transactions_count(self):
-        return  Transaction.objects.filter(
-            user = self.user
-        ).count()
+        return  (
+            self._get_transactions()
+            .count()
+        )
     
     def get_expenses_by_category(self):
         return (
-            Transaction.objects.filter(
-                user = self.user,
+            self._get_transactions()
+            .filter(
                 type = Transaction.TransactionType.EXPENSE
             )
-            .values(category_name=F("category__name"))
+            .values(category_=F("category__name"))
             .annotate(total=Sum("amount"))
             .order_by("-total")
         )
 
     def get_monthly_expense(self):
         return (
-            Transaction.objects.filter(
-                user = self.user,
+            self._get_transactions()
+            .filter(
                 type = Transaction.TransactionType.EXPENSE
             )
             .annotate(month=TruncMonth("date"))
@@ -60,18 +87,20 @@ class   DashboardService:
     
     def get_incomes_by_category(self):
         return (
-            Transaction.objects.filter(
+            self._get_transactions()
+            .filter(
                 user=self.user,
                 type=Transaction.TransactionType.INCOME
             )
-            .values(category_name=F("category__name"))
+            .values(category_=F("category__name"))
             .annotate(total=Sum("amount"))
             .order_by("-total")
         )
     
     def get_monthly_income(self):
         return (
-            Transaction.objects.filter(
+            self._get_transactions()
+            .filter(
                 user = self.user,
                 type = Transaction.TransactionType.INCOME
             )

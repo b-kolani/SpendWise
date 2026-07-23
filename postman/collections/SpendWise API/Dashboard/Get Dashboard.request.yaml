@@ -1,7 +1,12 @@
 $kind: http-request
 name: Get Dashboard
-url: "{{baseUrl}}/api/dashboard"
+url: "{{baseUrl}}/api/dashboard/?date_after=2026-52"
 method: GET
 headers:
   Authorization: Bearer {{accessToken}}
+queryParams:
+  - key: date_after
+    value: 2026-52
+    disabled: false
+    description: ""
 order: 1783938457478
