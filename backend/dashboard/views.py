@@ -7,8 +7,10 @@ from rest_framework.views import APIView
 # from decimal import Decimal
 # from django.db.models.functions import TruncMonth
 from .services import DashboardService
-from .serializers import DashboardSerializer
-from datetime import date
+from .serializers import (
+    DashboardFilterSerializer,
+    DashboardSerializer
+)
 
 # Create your views here.
 class   DashboardView(APIView):
@@ -16,11 +18,19 @@ class   DashboardView(APIView):
 
 
     def get(self, request):
-        date_after = request.query_params.get(
+        filter_serializer = DashboardFilterSerializer(
+            data=request.query_params
+        )
+
+        filter_serializer.is_valid(
+            raise_exception=True
+        )
+
+        date_after = filter_serializer.validated_data.get(
             "date_after"
         )
 
-        date_before = request.query_params.get(
+        date_before = filter_serializer.validated_data.get(
             "date_before"
         )
 

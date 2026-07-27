@@ -61,3 +61,26 @@ class   DashboardSerializer(serializers.Serializer):
     monthly_income = MonthlyIncomeSerializer(
         many=True
     )
+
+class   DashboardFilterSerializer(serializers.Serializer):
+    date_after = serializers.DateField(
+        required=False
+    )
+
+    date_before = serializers.DateField(
+        required=False
+    )
+
+    def validate(self, attrs):
+        self.date_after = attrs.get("date_after")
+        self.date_before = attrs.get("date_before")
+
+        if (
+            self.date_after 
+            and self.date_before
+            and self.date_after > self.date_before
+        ):
+            raise serializers.ValidationError(
+                "date_after should be before date_before."
+            )
+        return attrs

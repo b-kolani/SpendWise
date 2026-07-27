@@ -10,8 +10,8 @@ class   DashboardService:
     def __init__(
         self,
         user,
-        date_after,
-        date_before
+        date_after=None,
+        date_before=None
     ):
         self.user = user
         self.date_after = date_after
