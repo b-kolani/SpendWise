@@ -4,6 +4,10 @@ method: GET
 url: "{{baseUrl}}/api/transactions/"
 headers:
   Authorization: Bearer {{accessToken}}
+auth:
+  type: bearer
+  credentials:
+    token: "{{accessToken}}"
 scripts:
   - type: afterResponse
     code: |-

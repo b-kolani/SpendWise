@@ -2,6 +2,8 @@ $kind: http-request
 name: List Categories
 method: GET
 url: "{{baseUrl}}/api/categories/"
+auth:
+  type: noauth
 order: 1000
 headers:
   Authorization: Bearer {{accessToken}}

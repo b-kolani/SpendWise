@@ -2,6 +2,10 @@ $kind: http-request
 name: Create Category
 method: POST
 url: "{{baseUrl}}/api/categories/"
+auth:
+  type: bearer
+  credentials:
+    token: "{{accessToken}}"
 order: 2000
 headers:
   Authorization: Bearer {{accessToken}}
@@ -10,7 +14,7 @@ body:
   type: json
   content: |-
     {
-      "name": "Food & Dining 3",
+      "name": "Food & Dining 2",
       "color": "#00FF00",
       "icon": "shopping-cart"
     }
