@@ -15,6 +15,10 @@ body:
       "type": "EXPENSE",
       "category": {{invalidCategoryId}}
     }
+auth:
+  type: bearer
+  credentials:
+    token: "{{accessToken}}"
 scripts:
   - type: afterResponse
     code: |-

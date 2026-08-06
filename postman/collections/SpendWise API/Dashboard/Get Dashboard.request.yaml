@@ -7,4 +7,6 @@ headers:
 queryParams:
   date_after: 2026-07-01
   date_before: 2026-07-27
+auth:
+  type: noauth
 order: 1783938457478

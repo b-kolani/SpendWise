@@ -13,9 +13,13 @@ body:
       "amount": 75.50,
       "date": "2026-07-10",
       "description": "Weekly groceries",
-      "type": "income",
+      "type": "expense",
       "category": {{categoryId}}
     }
+auth:
+  type: bearer
+  credentials:
+    token: "{{accessToken}}"
 scripts:
   - type: afterResponse
     code: |-

@@ -16,6 +16,10 @@ body:
       "category": {{categoryId}},
       "date": "2026-07-20"
     }
+auth:
+  type: bearer
+  credentials:
+    token: "{{accessToken}}"
 scripts:
   - type: afterResponse
     code: |-
