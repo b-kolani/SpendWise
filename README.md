@@ -1,4 +1,4 @@
-# SpendWise 
+# SpendWise
     SpendWise est une application web de gestion de budget personnel.
 
 ## Objectifs
